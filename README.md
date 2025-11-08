@@ -80,7 +80,7 @@ A interface web estará disponível em `http://localhost:5173`
 ![Interface Desktop](./apps/web/docs/preview-desktop.png)
 
 ### Versão Mobile
-![Interface Mobile](./apps/web/docs/preview-mobile.png)
+<div align="center"> <img src="./apps/web/docs/preview-mobile.png" alt="Visualização Mobile" width="300"/> </div>
 
 ## 🛠️ Tecnologias Utilizadas
 
