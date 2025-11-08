@@ -65,7 +65,7 @@ app.post("/api/links", async (c) => {
   });
 });
 
-// obter link(s)
+// obter links
 app.get("/api/links/:slug", async (c) => {
   const { slug } = c.req.param();
   const link = await prisma.link.findUnique({ where: { slug } });
