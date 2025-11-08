@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Link {
+  id           String    @id @default(cuid())
+  slug         String    @unique
+  destination  String
+  createdAt    DateTime  @default(now())
+  expiresAt    DateTime?
+  maxClicks    Int?
+  clickCount   Int       @default(0)
+  lastAccessAt DateTime?
+
+  @@map("links")
+}
