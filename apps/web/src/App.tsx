@@ -29,7 +29,10 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1>URL Shortener</h1>
+      <div className="header">
+        <img src="/logo.png" alt="" className="logo" />
+        <h1>URL Shortener</h1>
+      </div>
       <CreateForm onCreated={() => load()} />
       <UrlList items={items} baseUrl={API_BASE} />
     </div>
