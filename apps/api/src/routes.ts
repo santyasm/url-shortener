@@ -88,7 +88,7 @@ app.get("/api/links/:slug/qr", async (c) => {
   const link = await prisma.link.findUnique({ where: { slug } });
   if (!link) return c.json({ error: "Not found" }, 404);
 
-  const url = `${Bun.env.BASE_URL}/${slug}`;
+  const url = `${Bun.env.API_BASE_URL}/${slug}`;
   const svg = await QRCode.toString(url, { type: "svg", margin: 0 });
   return new Response(svg, {
     headers: {
