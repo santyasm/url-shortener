@@ -6,7 +6,7 @@ import QRCode from "qrcode";
 
 const app = new Hono();
 
-app.get("/", (c) => c.text("Url Shortener API"));
+app.get("/", (c) => c.json({ message: "URL shortener API" }));
 app.get("/health", (c) => c.json({ ok: true }));
 
 const createSchema = z.object({
