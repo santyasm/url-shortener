@@ -1,0 +1,45 @@
+name: E2E Tests (Playwright)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Cache npm directory
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-cache-${{ runner.os }}-${{ hashFiles('apps/web/package.json') }}
+          restore-keys: |
+            npm-cache-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          npm ci || npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium webkit --with-deps
+
+      - name: Run Playwright tests
+        env:
+          E2E_BASE_URL: http://localhost:5173
+          E2E_HEADLESS: "true"
+          E2E_BROWSERS: "chromium,webkit"
+        run: npm run test:e2e
